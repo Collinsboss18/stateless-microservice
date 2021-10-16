@@ -4,7 +4,6 @@ const jsonpatch = require("jsonpatch");
 const ErrorResponse = require("../utils/appResponse/errorResponse");
 const { default: axios } = require("axios");
 const sharp = require("sharp");
-const fs = require("fs");
 
 module.exports = {
   LoginController: async (req, res) => {
@@ -42,8 +41,8 @@ module.exports = {
     let { url } = req.body;
 
     try {
-      const res = await axios.get(url, { responseType: "arraybuffer" });
-      const buffer = Buffer.from(res.data, "utf-8");
+      const data = await axios.get(url, { responseType: "arraybuffer" });
+      const buffer = Buffer.from(data.data, "utf-8");
       let image = await sharp(buffer).resize(50, 50).toBuffer();
       return res.status(200).json(new SuccessResponse(image));
     } catch (error) {
