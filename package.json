@@ -1,0 +1,23 @@
+{
+  "name": "hackerbay-nodejs-task",
+  "version": "1.0.0",
+  "description": "simple stateless microservice in Nodejs",
+  "main": "app.js",
+  "scripts": {
+    "test": "nyc mocha"
+  },
+  "keywords": [
+    "mocha",
+    "node",
+    "express"
+  ],
+  "author": "Collins Abadaike",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "jsonpatch": "^3.0.1",
+    "jsonwebtoken": "^8.5.1"
+  }
+}
