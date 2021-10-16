@@ -1,7 +1,7 @@
 const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
-const logger = require("./config/logger");
+const logger = require("simple-node-logger").createSimpleLogger();
 const app = express();
 
 // Import Routes
@@ -15,6 +15,12 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/api", IndexRoutes);
 
+// Unhandled Errors
+app.use((error, req, res, next) => {
+  logger.error(error);
+  return res.status(500).json(new ErrorResponse("Server error, try again"));
+});
+
 // Unhandled Route Response
 app.all("*", (req, res) => {
   res.status(404).send({
@@ -22,12 +28,6 @@ app.all("*", (req, res) => {
     message: `OOPs!! from HackerBay Backend. Server can't find ${req.originalUrl}.
       Check the API specification for further guidance`,
   });
-});
-
-// Unhandled Errors
-app.use((error, req, res, next) => {
-  logger.error(error);
-  return res.status(500).json(new ErrorResponse("Server error, try again"));
 });
 
 module.exports = app;

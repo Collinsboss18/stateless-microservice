@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const fs = require('fs');
 
 /** Encrypt data (Password) */
 module.exports.hashedPassword = async (password) =>
